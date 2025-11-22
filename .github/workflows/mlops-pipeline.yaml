@@ -68,9 +68,10 @@ jobs:
         python -m pip install --upgrade pip pip install -r requirements.txt
 
     - name: Download processed data 
-      uses: actions/download-artifact@v4 with:
-    - name: processed-data 
-      path: data/processed/
+      uses: actions/download-artifact@v4 
+      with:
+        name: processed-data 
+        path: data/processed/
 
     - name: Set up MLflow 
       run: |
@@ -131,7 +132,7 @@ jobs:
     - name: Build and push Docker image      
       uses: docker/build-push-action@v5      
       with:          
-        context: .          
-        file: ./Dockerfile          p
-        ush: true          
+        context: .      
+        file: ./Dockerfile
+        push: true     
         tags: docker.io/${{ vars.DOCKERHUB_USERNAME }}/house-pricemodel:latest
