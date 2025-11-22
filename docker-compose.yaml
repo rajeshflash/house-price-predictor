@@ -1,0 +1,20 @@
+services:
+  fastapi:
+    image: rakumar838/fastapi:dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    #command: uvicorn app.main:app --host
+
+  streamlit:
+    image: rakumar838/streamlit:dev
+    build:
+      context: ./streamlit_app
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    environment:
+      API_URL: http://fastapi:9000
+   # command: streamlit run streamlit_app.py --server.port 8501 --server.address
